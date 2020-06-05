@@ -1,12 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Solution\CodeMirrorBundle\Tests;
 
 use Solution\CodeMirrorBundle\Asset\AssetManager;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Bundle\FrameworkBundle\Client;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Solution\CodeMirrorBundle\Tests\App\AppKernel;
 
 class AssertTest extends WebTestCase
 {
@@ -15,21 +14,16 @@ class AssertTest extends WebTestCase
      */
     protected $asset;
 
-    /** @var  ContainerInterface */
-    protected $container;
-
-    protected function setUp()
+    protected function setUp(): void
     {
-        self::$kernel = new AppKernel('test', true);
-        static::$kernel->boot();
-        $this->container = static::$kernel->getContainer();
-        $this->asset = $this->container->get('code_mirror.asset_manager');
+        self::bootKernel(['APP_ENV' => 'test', 'APP_DEBUG' => true]);
+        $this->asset = self::$container->get('code_mirror.asset_manager');
     }
 
     /**
      * Test themes
      */
-    public function testGetThemes()
+    public function testGetThemes(): void
     {
         $this->assertEquals(
             array(
@@ -42,7 +36,7 @@ class AssertTest extends WebTestCase
     /**
      * Test modes
      */
-    public function testGetModes()
+    public function testGetModes(): void
     {
         $this->assertEquals(
             array(
@@ -58,7 +52,7 @@ class AssertTest extends WebTestCase
     /**
      * Test instance
      */
-    public function testMustBeInstance()
+    public function testMustBeInstance(): void
     {
         $this->assertInstanceOf('Solution\CodeMirrorBundle\Asset\AssetManager', $this->asset);
     }
@@ -66,7 +60,7 @@ class AssertTest extends WebTestCase
     /**
      * Test add mode
      */
-    public function testAddMode()
+    public function testAddMode(): void
     {
         $mode = array('text/html', '@SolutionCodeMirrorBundle/Resource/public/js/mode/php.js');
         $this->asset->addMode($mode[0], $mode[1]);
@@ -77,13 +71,11 @@ class AssertTest extends WebTestCase
     /**
      * Test add mode
      */
-    public function testTheme()
+    public function testTheme(): void
     {
         $mode = array('twilight', '@SolutionCodeMirrorBundle/Resource/public/css/theme/twilight.css');
         $this->asset->addTheme($mode[0], $mode[1]);
 
         $this->assertEquals($mode[1], $this->asset->getTheme($mode[0]));
     }
-
-
 }
