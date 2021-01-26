@@ -24,7 +24,7 @@
         "symfony/symfony": "~3.4",
         "twig/twig": "*",
         "symfony/assetic-bundle": "*",
-        "zendframework/zend-json": "2.0.*"
+        "laminas/laminas-json": "^3.1@dev"
     },
     "minimum-stability": "dev",
     "autoload": {
