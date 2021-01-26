@@ -29,13 +29,27 @@ final class CodeMirrorType extends AbstractType
     }
 
     /**
-     * {@inheritdoc}
+     * Keep this to use same widget.
+     *
+     * @return string
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'parameters' => $this->parameters
+            )
+        );
+    }
+
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(
+            array(
+                'parameters' => array(),
             )
         );
     }
