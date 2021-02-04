@@ -43,18 +43,6 @@ final class CodeMirrorType extends AbstractType
     }
 
     /**
-     * @param OptionsResolver $resolver
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(
-            array(
-                'parameters' => array(),
-            )
-        );
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getParent()
